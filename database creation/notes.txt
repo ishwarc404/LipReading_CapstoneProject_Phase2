@@ -1,0 +1,4 @@
+1. Do we neeed to resize the frames while taking them in ? Or should we resize them later while building the model ?
+
+
+
