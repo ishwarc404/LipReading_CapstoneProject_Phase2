@@ -9,3 +9,8 @@ click enter to stop again.
 Preferably speak the word under 30 frames.
 
 Have fun
+
+
+#Questions 
+1. Do we neeed to resize the frames while taking them in ? Or should we resize them later while building the model ?
+
