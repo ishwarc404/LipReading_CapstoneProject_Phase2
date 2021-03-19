@@ -52,7 +52,7 @@ def concate_images(subforlder):
 	output = np.concatenate((layer1, layer2, layer3, layer4, layer5,layer6), axis=0)
 	# cv2.imshow('concat',output)
 	# cv2.waitKey(0) 
-	output_path = "concatenated_images/"
+	output_path = "concatenated_images/good/"
 	cv2.imwrite(output_path+"{}_concate_output.jpg".format(subforlder), output)
 	print("[INFO] concate done")
 
