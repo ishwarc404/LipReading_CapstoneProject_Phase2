@@ -1,11 +1,12 @@
 import numpy as np
 import cv2
+import os
 
 #read from folder result_lip and write to same folder with name concate-output.jpg
-def concate_images(): 
-	concate_seq= np.array([0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10,11,12,13,14,14])
+def concate_images(subforlder): 
+	# concate_seq= np.array([0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10,11,12,13,14,14])
 	#read image
-	path="pictures/"
+	path="pictures/"+subforlder+"/"
 	im_1 = cv2.imread(path+"1.jpg", cv2.IMREAD_COLOR)
 	im_2 = cv2.imread(path+"2.jpg", cv2.IMREAD_COLOR)
 	im_3 = cv2.imread(path+"3.jpg", cv2.IMREAD_COLOR)
@@ -41,12 +42,30 @@ def concate_images():
 	im_25 = cv2.imread(path+"25.jpg", cv2.IMREAD_COLOR)
 	layer5 = np.concatenate((im_21, im_22, im_23, im_24, im_25), axis=1)
 
-	output = np.concatenate((layer1, layer2, layer3, layer4, layer5), axis=0)
-	cv2.imshow('concat',output)
-	cv2.waitKey(0) 
-	cv2.imwrite(path+"concate_output.jpg", output)
+	im_26 = cv2.imread(path+"26.jpg", cv2.IMREAD_COLOR)
+	im_27 = cv2.imread(path+"27.jpg", cv2.IMREAD_COLOR)
+	im_28 = cv2.imread(path+"28.jpg", cv2.IMREAD_COLOR)
+	im_29 = cv2.imread(path+"29.jpg", cv2.IMREAD_COLOR)
+	im_30 = cv2.imread(path+"30.jpg", cv2.IMREAD_COLOR)
+	layer6 = np.concatenate((im_26, im_27, im_28, im_29, im_30), axis=1)
+
+	output = np.concatenate((layer1, layer2, layer3, layer4, layer5,layer6), axis=0)
+	# cv2.imshow('concat',output)
+	# cv2.waitKey(0) 
+	output_path = "concatenated_images/"
+	cv2.imwrite(output_path+"{}_concate_output.jpg".format(subforlder), output)
 	print("[INFO] concate done")
 
 
 
-concate_images()
+if __name__ == "__main__":
+	directory = "pictures"
+	folders = []
+	for x in os.walk(directory):
+		folders = x[1]
+		break
+
+	# the folders list contains a list of all the subfolders print(folders)
+	#we need to call the concat function on each of these sub folders
+	for eachfolder in folders:
+		concate_images(eachfolder)
