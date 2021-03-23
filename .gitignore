@@ -1,3 +1,5 @@
+vgg16_1.h5
+Demo/control.py
 training model/pictures
 training model/testing_images
 training model/concatenated_images

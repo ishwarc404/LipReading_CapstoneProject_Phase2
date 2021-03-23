@@ -38,7 +38,7 @@ model.add(Dense(units=2, activation="softmax"))
 
 from keras.optimizers import Adam
 opt = Adam(lr=0.001)
-model.compile(optimizer=opt, loss=keras.losses.categorical_crossentropy, metrics=['accuracy'])
+model.compile(optimizer=opt, loss=keras.losses.categorical_crossentropy, metrics=['acc'])
 # model.summary()
 
 
@@ -46,16 +46,16 @@ model.compile(optimizer=opt, loss=keras.losses.categorical_crossentropy, metrics
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 checkpoint = ModelCheckpoint("vgg16_1.h5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False, mode='auto', period=1)
 early = EarlyStopping(monitor='val_acc', min_delta=0, patience=20, verbose=1, mode='auto')
-hist = model.fit_generator(steps_per_epoch=1,generator=traindata, validation_data= testdata, validation_steps=10,epochs=5,callbacks=[checkpoint,early])
+hist = model.fit_generator(steps_per_epoch=30,generator=traindata, validation_data= testdata, validation_steps=10,epochs=7,callbacks=[checkpoint,early])
 
 #results
-# import matplotlib.pyplot as plt
-# plt.plot(hist.history["acc"])
-# plt.plot(hist.history['val_acc'])
-# plt.plot(hist.history['loss'])
-# plt.plot(hist.history['val_loss'])
-# plt.title("model accuracy")
-# plt.ylabel("Accuracy")
-# plt.xlabel("Epoch")
-# plt.legend(["Accuracy","Validation Accuracy","loss","Validation Loss"])
-# plt.show()
+import matplotlib.pyplot as plt
+plt.plot(hist.history["acc"])
+plt.plot(hist.history['val_acc'])
+plt.plot(hist.history['loss'])
+plt.plot(hist.history['val_loss'])
+plt.title("model accuracy")
+plt.ylabel("Accuracy")
+plt.xlabel("Epoch")
+plt.legend(["Accuracy","Validation Accuracy","loss","Validation Loss"])
+plt.show()
