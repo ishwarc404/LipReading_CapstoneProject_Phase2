@@ -1,6 +1,8 @@
 vgg16_1.h5
+Demo/shape_predictor_68_face_landmarks.dat
 Demo/control.py
 training model/pictures
 training model/testing_images
 training model/concatenated_images
+*.dat
 database creation/pictures
