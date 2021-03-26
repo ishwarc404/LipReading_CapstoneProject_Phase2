@@ -116,7 +116,6 @@ def natural_keys(text):
 
 def processImages():
 
-	
 	frames = [f for f in listdir("pictures") if isfile(join("pictures", f))]
 	try:
 		frames.remove(".DS_Store")

@@ -1,4 +1,5 @@
 vgg16_1.h5
+Demo/pictures
 Demo/shape_predictor_68_face_landmarks.dat
 Demo/control.py
 training model/pictures
