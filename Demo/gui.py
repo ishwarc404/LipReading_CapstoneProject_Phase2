@@ -74,10 +74,11 @@ class MyFrame(wx.Frame):
 
         # textlabel
         # CREATE STATICTEXT AT POINT (20, 20)
-        self.outputLabel = wx.StaticText(panel, id=1, label="", pos=(150, 200),
+        self.outputLabel = wx.StaticText(panel, id=1, label="", pos=(120, 200),
                                          size=wx.DefaultSize, style=0, name="statictext")
 
-
+        font = wx.Font(25, wx.MODERN , wx.NORMAL, wx.NORMAL)
+        self.outputLabel.SetFont(font)
 
         # self.SetMaxSize(wx.Size(400, 300))
         # self.SetMinSize(wx.Size(400, 300))
