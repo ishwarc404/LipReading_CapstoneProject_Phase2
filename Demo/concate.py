@@ -57,14 +57,26 @@ def concate_images(subforlder):
 	print("[INFO] concate done")
 
 
-def upScaleFrames:
+def concatFrameSet(frameSet):
 	pass
 
-def downScaleFrames:
+def upScaleFrames(frameSet):
+	#if less than 30
+	upScaleFactor = 30 - (frameSet[1]-frameSet[0]+1)
+	print("[INFO]: Upscaling frameSet {} -> {} by factor {}".format(frameSet[0],frameSet[1],upScaleFactor))
+	concatFrameSet(frameSet)
 	pass
 
-def zeroScaleFrames:
+def downScaleFrames(frameSet):
+	#if more than 30
+	downScaleFactor = (frameSet[1]-frameSet[0]+1) - 30
+	print("[INFO]: Downscaling frameSet {} -> {} by factor {}".format(frameSet[0],frameSet[1],downScaleFactor))
+	concatFrameSet(frameSet)
 	pass
+
+def zeroScaleFrames(frameSet):
+	concatFrameSet(frameSet)
+	
 
 
 

@@ -5,6 +5,8 @@ import time
 from imutils.video import WebcamVideoStream
 from imutils.video import FPS
 import cv2
+import glob
+import os
 
 iteration = 1
 mirror = True
@@ -113,7 +115,7 @@ class MyFrame(wx.Frame):
         print("[INFO] sampling THREADED frames from webcam...")
         self.vs.start()
         self.fps.start()
-        record_index = 1
+        record_index = 0
         while self.fps._numFrames < 1000 and not(self.stop):
             frame = self.vs.read()
             print("frames: "+str(self.fps._numFrames) +
@@ -126,7 +128,10 @@ class MyFrame(wx.Frame):
             self.fps.stop()
 
     def stop_translating(self):
-        # do a bit of cleanup
+        # do a bit of cleanup, remove 0th image as is it always black
+        files = glob.glob('pictures/0.jpg')
+        os.remove(files[0])
+
         self.vs.stop()
         streamer.processImages()
         time.sleep(2)
