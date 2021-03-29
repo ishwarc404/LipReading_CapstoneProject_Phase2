@@ -14,8 +14,12 @@ def streamAudio():
     # audio = mixer.Sound("outputAudio.mp3")
     # audio_length = audio.get_length()
     mixer.music.play() #Play it
+    
+    try:
+        event.wait()
+    except:
+        pass
 
-    event.wait()
     mixer.music.stop()
 
 

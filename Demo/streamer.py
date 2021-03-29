@@ -10,15 +10,37 @@ import math
 import similarity
 import slidingWindow
 import concate
+import requests
+import json
 
 def displayText():
-	time.sleep(3)
-	with open("result_lip/demotext.txt") as f:
-			content = f.readlines()
-			print(content)
-			outputfile = open("result_lip/text.txt",'w')
-			outputfile.write(content[0])
-			outputfile.close()
+	# time.sleep(3)
+	data = requests.get("https://api.jsonstorage.net/v1/json/8f3f28fa-e45d-4de8-bbb7-ed6ca5582f30")
+	value = json.loads(data.content)
+	value = value['string']
+	split_values = [i for i in value]
+	# print(split_values)
+	result = " "
+	for number in split_values:
+		if(number == '1'):
+			result += "Hello "
+		elif(number == '2'):
+			result += "Bye "
+		elif(number == '3'):
+			result += "Good "
+		elif(number == '4'):
+			result += "Day " 
+		else:
+			result += "Unknown"
+	return result
+	# with open("result_lip/demotext.txt") as f:
+	# 		content = f.readlines()
+	# 		print(content)
+	# 		return content[0]
+	# 		outputfile = open("result_lip/text.txt",'w')
+	# 		outputfile.write(content[0])
+	# 		outputfile.close()
+
 			
 def clean_pictures():
 	#clean folder

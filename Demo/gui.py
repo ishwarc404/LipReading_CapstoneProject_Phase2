@@ -70,11 +70,14 @@ class MyFrame(wx.Frame):
         # start button
         start_button = wx.Button(panel, label='Start', pos=(150, 45))
         start_button.Bind(wx.EVT_BUTTON, self.on_start_press)
-        # start_button.SetBackgroundColour((89, 197, 247))
+        start_button.SetForegroundColour((0,0,0)) # set text color
+        start_button.SetBackgroundColour((89, 197, 247))
 
         # stop button
         stop_button = wx.Button(panel, label='Stop', pos=(150, 85))
         stop_button.Bind(wx.EVT_BUTTON, self.on_stop_press)
+        stop_button.SetForegroundColour((0,0,0)) # set text color
+        stop_button.SetBackgroundColour((89, 197, 247))
 
         # textlabel
         # CREATE STATICTEXT AT POINT (20, 20)
@@ -136,14 +139,14 @@ class MyFrame(wx.Frame):
         files = glob.glob('pictures/0.jpg')
         os.remove(files[0])
 
-        self.vs.stop()
-        streamer.processImages()
-        time.sleep(2)
-        outputfile = open("result_lip/text.txt", 'w')
-        outputfile.write("Processing")
-        outputfile.close()
+        # self.vs.stop()
+        # streamer.processImages()
+        # time.sleep(2)
+        # outputfile = open("result_lip/text.txt", 'w')
+        # outputfile.write("Processing")
+        # outputfile.close()
         
-        outputText = "Hello Good Day Bye"
+        outputText = streamer.displayText()
         self.outputLabel.SetLabel(outputText)
         language = 'en'
         myobj = gTTS(text=outputText, lang=language, slow=False)

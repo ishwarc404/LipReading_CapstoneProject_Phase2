@@ -58,7 +58,7 @@ def analyseWindowSize():
     # for i in range(0,len(new_vertical_distances)):
     #     print("Frame {} - Distance {}".format(i+1,new_vertical_distances[i]))
 
-    print("Total frames: ", len(new_vertical_distances))
+    # print("Total frames: ", len(new_vertical_distances))
     ranges = [0.01,0.02,0.03,0.00,0.0] #the numbers have to be this small to be considered as word boundries
     current_difference = 0
 
