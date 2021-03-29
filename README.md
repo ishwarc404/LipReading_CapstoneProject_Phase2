@@ -7,4 +7,5 @@ Lip Reading using Image Processing and Deep Learning
 # Steps
 1. Database creation
 2. Training model ( concatenation followed by training )
+3. Demo script
 
