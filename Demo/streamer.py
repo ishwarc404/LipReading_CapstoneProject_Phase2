@@ -60,10 +60,10 @@ def processImages():
 
 
 	#frechet distance model runs here
-	result = similarity.similarityIndex(vertical_distances)
-	outputfile = open("result_lip/text_.txt",'w')
-	outputfile.write(result)
-	outputfile.close()
+	# result = similarity.similarityIndex(vertical_distances)
+	# outputfile = open("result_lip/text_.txt",'w')
+	# outputfile.write(result)
+	# outputfile.close()
 
 
 

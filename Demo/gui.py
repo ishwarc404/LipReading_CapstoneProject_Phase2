@@ -7,6 +7,8 @@ from imutils.video import FPS
 import cv2
 import glob
 import os
+from gtts import gTTS
+import virtualAudio
 
 iteration = 1
 mirror = True
@@ -78,9 +80,11 @@ class MyFrame(wx.Frame):
         # CREATE STATICTEXT AT POINT (20, 20)
         self.outputLabel = wx.StaticText(panel, id=1, label="", pos=(120, 200),
                                          size=wx.DefaultSize, style=0, name="statictext")
+        
 
         font = wx.Font(25, wx.MODERN , wx.NORMAL, wx.NORMAL)
         self.outputLabel.SetFont(font)
+        self.outputLabel.SetForegroundColour((255,0,0)) # set text color
 
         # self.SetMaxSize(wx.Size(400, 300))
         # self.SetMinSize(wx.Size(400, 300))
@@ -138,8 +142,16 @@ class MyFrame(wx.Frame):
         outputfile = open("result_lip/text.txt", 'w')
         outputfile.write("Processing")
         outputfile.close()
-
-        self.outputLabel.SetLabel("some sentence")
+        
+        outputText = "Hello Good Day Bye"
+        self.outputLabel.SetLabel(outputText)
+        language = 'en'
+        myobj = gTTS(text=outputText, lang=language, slow=False)
+        # Saving the converted audio in a mp3 file named
+        # welcome 
+        myobj.save("outputAudio.mp3")
+        time.sleep(2)
+        virtualAudio.streamAudio()
 
 
 if __name__ == '__main__':
