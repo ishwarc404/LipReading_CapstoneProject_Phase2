@@ -111,7 +111,12 @@ class MyFrame(wx.Frame):
     def on_stop_press(self, event):
         print("Stop clicked")
         self.stop = True
-        self.stop_translating()
+
+        #processing animation
+        outputText = "Processing.."
+        self.outputLabel.SetLabel(outputText)
+
+        self.create_thread(self.stop_translating)
 
     vs = WebcamVideoStream(src=0)
     fps = FPS()
@@ -135,16 +140,19 @@ class MyFrame(wx.Frame):
             self.fps.stop()
 
     def stop_translating(self):
-        # do a bit of cleanup, remove 0th image as is it always black
-        files = glob.glob('pictures/0.jpg')
-        os.remove(files[0])
 
-        # self.vs.stop()
-        # streamer.processImages()
-        # time.sleep(2)
-        # outputfile = open("result_lip/text.txt", 'w')
-        # outputfile.write("Processing")
-        # outputfile.close()
+        try:
+            # do a bit of cleanup, remove 0th image as is it always black
+            files = glob.glob('pictures/0.jpg')
+            os.remove(files[0])
+        except:
+            pass
+
+        self.vs.stop()
+        streamer.processImages()
+        outputfile = open("result_lip/text.txt", 'w')
+        outputfile.write("Processing")
+        outputfile.close()
         
         outputText = streamer.displayText()
         self.outputLabel.SetLabel(outputText)

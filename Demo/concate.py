@@ -1,12 +1,21 @@
 import numpy as np
 import cv2
 import os
+from os import listdir
+from os.path import isfile, join
+import re
+
+def atoi(text):
+    return int(text) if text.isdigit() else text
+
+def natural_keys(text):
+    return [ atoi(c) for c in re.split(r'(\d+)', text) ]
 
 #read from folder result_lip and write to same folder with name concate-output.jpg
-def concate_images(subforlder): 
+def concatenate_images(outname): 
 	# concate_seq= np.array([0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,10,11,12,13,14,14])
 	#read image
-	path="pictures/"+subforlder+"/"
+	path="temporary_images/"
 	im_1 = cv2.imread(path+"1.jpg", cv2.IMREAD_COLOR)
 	im_2 = cv2.imread(path+"2.jpg", cv2.IMREAD_COLOR)
 	im_3 = cv2.imread(path+"3.jpg", cv2.IMREAD_COLOR)
@@ -52,30 +61,94 @@ def concate_images(subforlder):
 	output = np.concatenate((layer1, layer2, layer3, layer4, layer5,layer6), axis=0)
 	# cv2.imshow('concat',output)
 	# cv2.waitKey(0) 
-	output_path = "concatenated_images/good/"
-	cv2.imwrite(output_path+"{}_concate_output.jpg".format(subforlder), output)
+	output_path = "concatenated_images/"
+	cv2.imwrite(output_path+"{}_concate_output.jpg".format(outname), output)
 	print("[INFO] concate done")
 
 
 def concatFrameSet(frameSet):
 	pass
 
+#frameset = [ending frame number, starting frame number]
 def upScaleFrames(frameSet):
 	#if less than 30
 	upScaleFactor = 30 - (frameSet[1]-frameSet[0]+1)
 	print("[INFO]: Upscaling frameSet {} -> {} by factor {}".format(frameSet[0],frameSet[1],upScaleFactor))
-	concatFrameSet(frameSet)
-	pass
+
+	#upscaling algorithm
+	#reading the frames
+	frames = [f for f in listdir("pictures") if isfile(join("pictures", f))]
+	try:
+		frames.remove(".DS_Store")
+	except:
+		pass
+	frames.sort(key=natural_keys)
+	frames = frames[frameSet[0]-1:frameSet[1]]
+	print(frames)
+	# now each of these frames are going undergo the facial landmark AREA and VERTICAL height calculation
+	
+	new_path = "temporary_images"
+	for each_frame in frames:
+		if(each_frame != ".DS_Store"):
+			frame_read = cv2.imread('pictures'+ "/"+each_frame)
+			cv2.imwrite(new_path + "/"+each_frame,frame_read)
+
+	#repeating boundry frames
+	boundry_frame = cv2.imread('pictures'+ "/"+str(frameSet[1]+1)+".jpg")
+	framenumber = 1 #keep incrementing this 
+	for k in range(upScaleFactor):
+		cv2.imwrite(new_path + "/"+str(frameSet[1]+framenumber)+".jpg",boundry_frame)
+		framenumber+=1
+
+	concatenate_images(str(frameSet[0])+"_"+str(frameSet[1]))
+
 
 def downScaleFrames(frameSet):
 	#if more than 30
 	downScaleFactor = (frameSet[1]-frameSet[0]+1) - 30
 	print("[INFO]: Downscaling frameSet {} -> {} by factor {}".format(frameSet[0],frameSet[1],downScaleFactor))
-	concatFrameSet(frameSet)
-	pass
+	
+	#upscaling algorithm
+	#reading the frames
+	frames = [f for f in listdir("pictures") if isfile(join("pictures", f))]
+	try:
+		frames.remove(".DS_Store")
+	except:
+		pass
+	frames.sort(key=natural_keys)
+	frames = frames[frameSet[0]-1:frameSet[1]-downScaleFactor]
+	print(frames)
+	# now each of these frames are going undergo the facial landmark AREA and VERTICAL height calculation
+	
+	new_path = "temporary_images"
+	for each_frame in frames:
+		if(each_frame != ".DS_Store"):
+			frame_read = cv2.imread('pictures'+ "/"+each_frame)
+			cv2.imwrite(new_path + "/"+each_frame,frame_read)
+
+	concatenate_images(str(frameSet[0])+"_"+str(frameSet[1]))
+
 
 def zeroScaleFrames(frameSet):
-	concatFrameSet(frameSet)
+	#zero algorithm - just shifting frames
+	#reading the frames
+	frames = [f for f in listdir("pictures") if isfile(join("pictures", f))]
+	try:
+		frames.remove(".DS_Store")
+	except:
+		pass
+	frames.sort(key=natural_keys)
+	frames = frames[frameSet[0]-1:frameSet[1]]
+	print(frames)
+	# now each of these frames are going undergo the facial landmark AREA and VERTICAL height calculation
+	
+	new_path = "temporary_images"
+	for each_frame in frames:
+		if(each_frame != ".DS_Store"):
+			frame_read = cv2.imread('pictures'+ "/"+each_frame)
+			cv2.imwrite(new_path + "/"+each_frame,frame_read)
+
+	concatenate_images(str(frameSet[0])+"_"+str(frameSet[1]))
 	
 
 

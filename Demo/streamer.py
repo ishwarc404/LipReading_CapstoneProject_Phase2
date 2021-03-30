@@ -25,11 +25,13 @@ def displayText():
 		if(number == '1'):
 			result += "Hello "
 		elif(number == '2'):
-			result += "Bye "
+			result += "Have "
 		elif(number == '3'):
 			result += "Good "
 		elif(number == '4'):
 			result += "Day " 
+		elif(number == '5'):
+			result += "Bye "
 		else:
 			result += "Unknown"
 	return result
@@ -48,6 +50,14 @@ def clean_pictures():
 	for f in files:
 	    os.remove(f)
 
+def clean_temporary_pictures():
+	#clean folder
+	files = glob.glob('temporary_images/*')
+	for f in files:
+	    os.remove(f)
+	files = glob.glob('concatenated_images/*')
+	for f in files:
+	    os.remove(f)
 
 
 def processImages():
@@ -55,7 +65,7 @@ def processImages():
 	#this tells us how to process the frames for the CNN model
 	#also returns vertical_distances which is already calculated in the analyse window function
 	#so we don't have to recalculate it
-
+	clean_temporary_pictures()
 	framesToProcess,vertical_distances = slidingWindow.analyseWindowSize()
 
 	#each set is [start number,ending number]

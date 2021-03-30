@@ -35,6 +35,7 @@ def natural_keys(text):
 
 #returns a list of list which contains frames which should be processed
 def analyseWindowSize():
+    print("[INFO]: Analysing window sizes")
     frames = [f for f in listdir("pictures") if isfile(join("pictures", f))]
     try:
         frames.remove(".DS_Store")
@@ -84,6 +85,7 @@ def analyseWindowSize():
     
 
     #new_vertical_distances is returned too as it is used by the frechet model
+    print("[INFO]: Frames to process are: ",framesToProcess)
     return framesToProcess, new_vertical_distances 
 
 
