@@ -1,5 +1,7 @@
 vgg16_1.h5
 Demo/pictures
+Demo/temporary_images
+Demo/concatenated_images
 Demo/shape_predictor_68_face_landmarks.dat
 Demo/control.py
 training model/pictures

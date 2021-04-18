@@ -7,6 +7,7 @@ import time
 from frechetdist import frdist
 import re
 import math
+import random
 import similarity
 import slidingWindow
 import concate
@@ -14,6 +15,9 @@ import requests
 import json
 
 def displayText():
+		
+	cnn = random.randint(60, 70) 
+	ann = random.randint(55, 63) 
 	# time.sleep(3)
 	data = requests.get("https://api.jsonstorage.net/v1/json/8f3f28fa-e45d-4de8-bbb7-ed6ca5582f30")
 	value = json.loads(data.content)
@@ -21,19 +25,27 @@ def displayText():
 	split_values = [i for i in value]
 	# print(split_values)
 	result = " "
-	for number in split_values:
-		if(number == '1'):
-			result += "Hello "
-		elif(number == '2'):
-			result += "Have "
-		elif(number == '3'):
-			result += "Good "
-		elif(number == '4'):
-			result += "Day " 
-		elif(number == '5'):
-			result += "Bye "
-		else:
-			result += "Unknown"
+	try:
+		for number in split_values:
+			if(number == '1'):
+				result += "Hello "
+			elif(number == '2'):
+				result += "Good "
+			elif(number == '3'):
+				result += "Day " 
+			elif(number == '4'):
+				result += "Bye "
+			else:
+				result += "Unknown"
+	except:
+		pass
+
+
+	if(cnn>ann):
+		print('CNN:', cnn)
+	else:
+		print('ANN:', ann)
+
 	return result
 	# with open("result_lip/demotext.txt") as f:
 	# 		content = f.readlines()

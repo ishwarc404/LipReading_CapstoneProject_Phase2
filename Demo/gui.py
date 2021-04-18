@@ -106,6 +106,9 @@ class MyFrame(wx.Frame):
 
     def on_start_press(self, event):
         print("Start clicked")
+         #processing animation
+        outputText = "Recording.."
+        self.outputLabel.SetLabel(outputText)
         self.create_thread(self.start_translating)
 
     def on_stop_press(self, event):
