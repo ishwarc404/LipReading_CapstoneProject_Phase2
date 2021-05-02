@@ -65,6 +65,7 @@ def analyseWindowSize():
 
     index_val = 1
     framesToProcess = []
+    print("New distances unsplit:",new_vertical_distances)
     #lets try to find the distances now
     #the number 15 was decided to give a healthy gap between the words. Around 15 frames will be taken to speak for any acceptable speed
     for k in range(1,len(new_vertical_distances)-1):

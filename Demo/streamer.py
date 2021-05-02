@@ -19,7 +19,7 @@ def displayText():
 	cnn = random.randint(60, 70) 
 	ann = random.randint(55, 63) 
 	# time.sleep(3)
-	data = requests.get("https://api.jsonstorage.net/v1/json/8f3f28fa-e45d-4de8-bbb7-ed6ca5582f30")
+	data = requests.get("https://jsonstorage.net/api/items/c291ed37-4f64-4841-8767-8561956df39a")
 	value = json.loads(data.content)
 	value = value['string']
 	split_values = [i for i in value]
