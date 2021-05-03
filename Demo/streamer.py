@@ -13,6 +13,7 @@ import slidingWindow
 import concate
 import requests
 import json
+import cnn_predict
 
 def displayText():
 		
@@ -24,7 +25,7 @@ def displayText():
 	value = value['string']
 	split_values = [i for i in value]
 	# print(split_values)
-	result = " "
+	result = ""
 	try:
 		for number in split_values:
 			if(number == '1'):
@@ -40,11 +41,11 @@ def displayText():
 	except:
 		pass
 
-
-	if(cnn>ann):
-		print('CNN:', cnn)
-	else:
-		print('ANN:', ann)
+	# if(result!=""):
+	# 	if(cnn>ann):
+	# 		print('CNN:', cnn)
+	# 	else:
+	# 		print('ANN:', ann)
 
 	return result
 	# with open("result_lip/demotext.txt") as f:
@@ -96,18 +97,34 @@ def processImages():
 			#it's perfect 30, we don't need to upscale or downscale
 	
 
-	#concat logic to come here
 
+	try:
+		#frechet distance model runs here
+
+		frechet_verdict = []
+		for frameSet in framesToProcess:
+			frechet_verdict.append(similarity.similarityIndex(vertical_distances[frameSet[0]:frameSet[1]]))
+
+		cnn_predict.final_verdict()
+	
+	except:
+		pass
 
 	#CNN model runs here
 
 
+	
 
-	#frechet distance model runs here
 	# result = similarity.similarityIndex(vertical_distances)
 	# outputfile = open("result_lip/text_.txt",'w')
 	# outputfile.write(result)
 	# outputfile.close()
+
+
+
+
+
+
 
 
 

@@ -7,10 +7,10 @@ from keras.layers import Convolution2D, MaxPooling2D, ZeroPadding2D
 import numpy as np
 
 
-# trdata = ImageDataGenerator()
-# traindata = trdata.flow_from_directory(directory="concatenated_images",target_size=(224,224))
-# tsdata = ImageDataGenerator()
-# testdata = tsdata.flow_from_directory(directory="testing_images",target_size=(224,224))
+trdata = ImageDataGenerator()
+traindata = trdata.flow_from_directory(directory="concatenated_images",target_size=(224,224))
+tsdata = ImageDataGenerator()
+testdata = tsdata.flow_from_directory(directory="testing_images",target_size=(224,224))
 
 def create_model():
         model = Sequential()

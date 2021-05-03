@@ -31,7 +31,7 @@ import json
 
 
 def displayText():
-	
+	print("Text displayed")
 	try:
 		cnn = random.randint(60, 70) 
 		ann = random.randint(55, 63) 
@@ -57,12 +57,15 @@ def displayText():
 		except:
 			pass
 
+		
+		outputfile = open("result_lip/text.txt",'w')
+		outputfile.write(result)
+		outputfile.close()
 
 		if(cnn>ann):
 			print('CNN:', cnn)
 		else:
 			print('ANN:', ann)
-
 
 		return result
 	except:

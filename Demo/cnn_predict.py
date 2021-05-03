@@ -12,6 +12,12 @@ import cnnmodel
 from scipy import misc
 from keras.preprocessing import image as image_utils
 
+def ann_model():
+    pass
+
+def final_verdict():
+    pass
+
 def predict():
     final_path = 'concatenated_images/'
     #read every image and run it
@@ -42,7 +48,8 @@ def predict():
 
     return prediction_class[0]
 
-def final_verdict(frechet_verdict,cnn_verdict):
+
+def final_verdict_(frechet_verdict,cnn_verdict):
     final_ver = {"word":'Uknown'}
 
     if(frechet_verdict == cnn_verdict['word']):
